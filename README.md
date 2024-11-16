@@ -27,4 +27,4 @@ Communication Contract:
           1. Display the sorted data (Title and Price) in the requested order
                 print_titles_and_prices(sorted_data)
                 
-
+![UML Sequence Diagram](path/to/your/UML Sequence Diagram.png)
