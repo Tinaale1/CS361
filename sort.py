@@ -22,11 +22,6 @@ def read_wishlist():
             line_data = line.strip().split(',')
             wishlist_data.append(line_data)
     return wishlist_data
-
-        #reader = csv.reader(file)    # Use csv.reader to handle CSV format
-        #for row in reader:
-            #wishlist_data.append(row)
-        #return wishlist_data
         
 
 def write_wishlist(data):
@@ -34,33 +29,19 @@ def write_wishlist(data):
     with open('Wishlist.csv', 'w') as file:
         for row in data:
             file.write(','.join(row) + '\n')
-       #writer = csv.writer(file)
-       #writer.writerows(data)
 
 def sort_by_title(row):
     """Helper function to get the title column for sorting."""
-    #try:
-        #title_index = header_row.index('Title')
-        #return row[title_index]
-    #except ValueError:
-        #return None
-    #if len(row) > 2:
-    return row[2].strip()
-    #return ""
+    return row[2].strip()   # Row[2] corresponds to the Title column and removes any leading or trailing whitespace
+
+
 
 def sort_by_price(row):
     """Helper function to get the price column for sorting."""
-    #try:
-        #if len(row) > 4:
-            #price = float(row[4].strip())
-            #return price
-    #except ValueError:
-        #pass
-    #return 0.0
     try:
-        return float(row[4].strip())   
-    except ValueError:
-        return 0.0
+        return float(row[4].strip())    # Row[4] corresponds to the Price column and removes any leading or trailing whitespace   
+    except ValueError:  # If row[4] cannot be converted to a float, a ValueError is raised and catches the error
+        return 0.0  # Returns 0.0 as a fallback value so that it will not crash and provides a default value for invalid or missing prices
 
 def get_sort_key(order):
     """Returns teh appropraite sorting function based on the order."""
@@ -91,22 +72,6 @@ def sort_wishlist(data, order):
     # Step 5: Return the header along with the sorted content rows
     return [header] + content_rows
 
-    #content_rows = [row for row in content_rows if len(row) >= 5]
-
-    # Determine sorting method based on order 
-
-    #if order == 'TA':
-        #sorted_data = sorted(content_rows, key=sort_by_title)
-    #elif order == 'TD':
-        #sorted_data = sorted(content_rows, key=sort_by_title, reverse = True)
-    #elif order == 'PA':
-        #sorted_data = sorted(content_rows, key=sort_by_price)
-    #elif order == 'PD':
-        #sorted_data = sorted(content_rows, key=sort_by_price, reverse=True)
-    #else:
-        #sorted_data = content_rows  # Return unsorted if order is unknown
-    
-    #return [header] + sorted_data   # Return sorted data with header
 
 def print_titles_and_prices(sorted_wishlist):
     # Extract the header and indices for the 'Title' and 'Price USD' columns
